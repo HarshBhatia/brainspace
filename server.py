@@ -7,5 +7,5 @@ app = Flask(__name__)
 def index():
     return "<h1>Brainspace!</h1>"
 
-if __name__ = "__main__":
-    main()
+if __name__ == "__main__":
+    app.run()

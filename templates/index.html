@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BrainSpace</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <div class="row container">
+		<div class="col s8">
+            <h3 class="blue-text">BrainSpace </h3>
+		</div>
+		<div class="col s4 scorebox">
+			<p class="right" style="margin-top:18px;"><span id="score" style="font-size:35px;">0</span> pts.</p>
+		</div>
+        <div class="col s12" id='main-div'>
+            <br>
+            <br>
+            <h1 class="center-align" id="jword">{{jword}}</h1>
+            <input id="answer" type="text">
+            <label for="letters">Answer</label>
+            <div class="center-align" style="margin-top:20px;">
+                <a class="wave
+                s-effect waves-light btn-large" id="submit">Solve</a>
+            </div>
+            <br>
+            <br>
+        </div>
+        <div id="high_scores">
+		
+        </div>
+        <div id="footer">
+            <p class="grey-text" style="float:right;margin-top:180px;">
+                Coded with Python and Love by Harsh Bhatia.</p>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+$("#submit").click(function() {
+
+
+    // $('#words').html("Loading...")
+
+    $.post("/data_post", {
+            answer: $('#answer').val(),
+            jword: $('#jword').html()
+
+        },
+        function(data, status) {
+        	jdata = $.parseJSON(data)
+        	console.log(jdata.score)
+        	console.log(jdata.correct)
+
+        	if(jdata.correct){
+	        	$('#score').html(jdata.score)
+	        	$('#jword').html(jdata.jword)
+	        	$('#answer').val('')
+           }
+           else{
+           		$('#main-div').html(jdata.page)
+           }
+
+        });
+});
+$("#submit_score").click(function() {
+
+
+    // $('#words').html("Loading...")
+
+    $.post("/score_post", {
+            name: $('#name').val(),
+            score: $('#score').html()
+
+        },
+        function(data, status) {
+        	$('#high_scores').html(data)
+        });
+});
+</script>
+
+</html>

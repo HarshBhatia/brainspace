@@ -1,0 +1,16 @@
+<table>
+        <thead>
+          <tr>
+              <th data-field="name">Name</th>
+              <th data-field="score">Score</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+          {% for score in scores%}
+            <td>{{score[0]}}</td>
+            <td>{{score[1]}}</td>
+          </tr>
+        </tbody>
+</table>

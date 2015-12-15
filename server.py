@@ -23,7 +23,7 @@ def shuffle(word):
 
 @app.route('/data_post', methods=['POST','GET'])
 def data_post():
-	answer = request.form['answer'].to_lower()
+	answer = request.form['answer'].lower()
 	jword = request.form['jword']
 	if (answer in english_words) and (len(answer)==len(jword)) and (set(jword)==set(answer)):
 		data = {"correct":True,"score":incr_score(),"jword":generate_word()}

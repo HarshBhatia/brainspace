@@ -24,12 +24,17 @@
             <br>
             <br>
             <h1 class="center-align" id="jword">{{jword}}</h1>
+            <p class="center-align" id="timer"></p>
+            <form id="hello">
             <input id="answer" type="text">
             <label for="letters">Answer</label>
             <div class="center-align" style="margin-top:20px;">
-                <a class="wave
-                s-effect waves-light btn-large" id="submit">Submit</a>
+                <button class="btn waves-effect waves-light" type="submit" id = "submit"name="action">Submit
+                </button>
+                      
             </div>
+          
+            </form>
             <br>
             <br>
         </div>
@@ -43,9 +48,24 @@
     </div>
 </body>
 <script type="text/javascript">
-$("#submit").click(function() {
+i=15
+$(document).ready(function() {
+    m = setInterval(function(){
+        if(i>0){
+            $("#timer").html(i)
+            i--
+        }
+        else{
+            clearInterval(m);
+            $("#hello").submit();
 
-
+        }
+    },1000);
+});
+$("#hello").submit(function() {
+    if(event){
+    event.preventDefault();};
+    i = 15;
     // $('#words').html("Loading...")
 
     $.post("/data_post", {

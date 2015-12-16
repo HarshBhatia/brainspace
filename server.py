@@ -61,7 +61,7 @@ def get_high_scores():
 	return render_template("score_table.html",scores = l)
 	# return l
 @app.route('/scores')
-def get_high_scores():
+def get_high_scores_full():
 	l = []																																																																																																																																																																																																																																																																																																																																																																																																									
 	for i in c.execute("""SELECT * FROM SCORES ORDER BY score DESC LIMIT 10"""):
 		l.append(i)

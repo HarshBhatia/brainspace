@@ -22,14 +22,13 @@
 		</div>
         <div class="col s12" id='main-div'>
             <br>
-            <br>
             <h1 class="center-align" id="jword">{{jword}}</h1>
-            <p class="center-align" id="timer"></p>
+            <p class="center-align" id="timer">15</p>
             <form id="hello">
-            <input id="answer" type="text">
+            <input id="answer" type="text" autocomplete="off">
             <label for="letters">Answer</label>
             <div class="center-align" style="margin-top:20px;">
-                <button class="btn waves-effect waves-light" type="submit" id = "submit"name="action">Submit
+                <button class="btn waves-effect waves-light " type="submit"  id = "submit"name="action">Submit
                 </button>
                       
             </div>
@@ -39,11 +38,13 @@
             <br>
         </div>
         <div id="high_scores">
-		
+        <a class="blue-text" style="float:left;margin-top:15%;" href="/scores">Scores</a>
+		<p class="grey-text" style="float:right;">
+
+		    Coded with Python and Love by Harsh Bhatia.</p>
         </div>
         <div id="footer">
-            <p class="grey-text" style="float:right;margin-top:180px;">
-                Coded with Python and Love by Harsh Bhatia.</p>
+            
         </div>
     </div>
 </body>
@@ -92,6 +93,7 @@ $("#hello").submit(function() {
 
         });
 });
+$(document).ready(function(){$("input.autocompleteOff").attr("autocomplete","off");});
 
 </script>
 

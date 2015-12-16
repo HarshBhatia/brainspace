@@ -53,12 +53,20 @@ def insert_high_score(name,score):
 	c.execute("""INSERT INTO SCORES(name,score) VALUES('{}',{})""".format(name,score))
 	conn.commit()
 
+
 def get_high_scores():
 	l = []																																																																																																																																																																																																																																																																																																																																																																																																									
 	for i in c.execute("""SELECT * FROM SCORES ORDER BY score DESC LIMIT 10"""):
 		l.append(i)
 	return render_template("score_table.html",scores = l)
 	# return l
+@app.route('/scores')
+def get_high_scores():
+	l = []																																																																																																																																																																																																																																																																																																																																																																																																									
+	for i in c.execute("""SELECT * FROM SCORES ORDER BY score DESC LIMIT 10"""):
+		l.append(i)
+	return render_template("score_table_full.html",scores = l)
+
 
 
 def high_scores_init():

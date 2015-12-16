@@ -5,7 +5,7 @@ import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret'
-conn = sqlite3.connect('high_scores4.db')
+conn = sqlite3.connect('high_scores4.db',check_same_thread=False)
 c = conn.cursor()
 
 with open("commonwords.txt") as word_file:
@@ -33,8 +33,10 @@ def data_post():
 		return json.dumps(data)
 @app.route('/score_post', methods=['POST','GET'])
 def score_post():
-	name = request.name['name']
-	score = request.form['score']
+	if request.method == 'GET':
+		return get_high_scores()
+	name = request.form['name']
+	score = int(request.form['score'])
 
 	insert_high_score(name, score)
 	return get_high_scores()
@@ -53,9 +55,10 @@ def insert_high_score(name,score):
 
 def get_high_scores():
 	l = []																																																																																																																																																																																																																																																																																																																																																																																																									
-	for i in c.execute("""SELECT * FROM SCORES"""):
+	for i in c.execute("""SELECT * FROM SCORES ORDER BY score DESC LIMIT 10"""):
 		l.append(i)
 	return render_template("score_table.html",scores = l)
+	# return l
 
 
 def high_scores_init():
@@ -67,4 +70,4 @@ if __name__ == "__main__":
 	app.debug = True
 	# insert_high_score('Harsh Bhatia', 50)
 	# get_high_scores()
-	app.run(host='0.0.0.0',port=8000)
+	app.run(host='0.0.0.0',port=5000)

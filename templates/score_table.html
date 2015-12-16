@@ -1,16 +1,22 @@
-<table>
-        <thead>
-          <tr>
-              <th data-field="name">Name</th>
-              <th data-field="score">Score</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-          {% for score in scores%}
+<h5>Top 10 Scores</h5>
+<table class="striped">
+    <thead>
+        <tr>
+            <th data-field="name">Name</th>
+            <th data-field="score">Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for score in scores%}
+        <tr>
             <td>{{score[0]}}</td>
             <td>{{score[1]}}</td>
-          </tr>
-        </tbody>
+        </tr>
+        {%endfor%}
+    </tbody>
 </table>
+<br>
+<div class="align-center">
+    <a class="wave
+      s-effect waves-light btn blue" onclick="location.reload();">Play Again</a>
+</div>

@@ -28,7 +28,7 @@
             <label for="letters">Answer</label>
             <div class="center-align" style="margin-top:20px;">
                 <a class="wave
-                s-effect waves-light btn-large" id="submit">Solve</a>
+                s-effect waves-light btn-large" id="submit">Submit</a>
             </div>
             <br>
             <br>
@@ -65,24 +65,14 @@ $("#submit").click(function() {
            }
            else{
            		$('#main-div').html(jdata.page)
+           		$('.scorebox').css({
+           			display: 'none'
+           		});
            }
 
         });
 });
-$("#submit_score").click(function() {
 
-
-    // $('#words').html("Loading...")
-
-    $.post("/score_post", {
-            name: $('#name').val(),
-            score: $('#score').html()
-
-        },
-        function(data, status) {
-        	$('#high_scores').html(data)
-        });
-});
 </script>
 
 </html>

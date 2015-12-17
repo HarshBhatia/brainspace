@@ -9,13 +9,17 @@ conn = sqlite3.connect('high_scores4.db',check_same_thread=False)
 c = conn.cursor()
 
 with open("commonwords.txt") as word_file:
+	common_english_words = list(set(word.strip().lower() for word in word_file))
+
+with open("wordsEn.txt") as word_file:
 	english_words = list(set(word.strip().lower() for word in word_file))
+
 
 
 @app.route('/')
 def index():
 	session['score'] = 0
-	return render_template("index.html",jword =	shuffle(random.choice(english_words)))
+	return render_template("index.html",jword =	shuffle(random.choice(common_english_words)))
 
 def shuffle(word):
 	shuffled = ''.join(random.sample(word, len(word)))
@@ -47,7 +51,7 @@ def incr_score():
 	return session['score']
 
 def generate_word():
-	return shuffle(random.choice(english_words))
+	return shuffle(random.choice(common_english_words))
 
 def insert_high_score(name,score):
 	c.execute("""INSERT INTO SCORES(name,score) VALUES('{}',{})""".format(name,score))
